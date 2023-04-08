@@ -336,6 +336,7 @@ label {
 
 button {
   // stylelint-disable-next-line property-blacklist
+
   border-radius: 0;
 }
 
@@ -349,6 +350,10 @@ button:focus {
   outline: 5px auto -webkit-focus-ring-color;
 }
 
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
 // 1. Remove the margin in Firefox and Safari
 
 input,
@@ -356,6 +361,9 @@ button,
 select,
 optgroup,
 textarea {
+  // padding: 0;
+  // padding: unset;
+
   margin: 0;
   font-family: inherit;
   font-size: inherit;

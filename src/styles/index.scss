@@ -3,3 +3,8 @@
 
 //layout
 @import "reboot";
+
+//mixin
+@import "mixin";
+//buttom
+@import "../components/Button/style"; //作用域从上到下

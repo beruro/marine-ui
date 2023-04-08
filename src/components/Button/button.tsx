@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, ButtonHTMLAttributes, AnchorHTMLAttributes } from "react";
 import classNames from "classnames";
 
 //size
@@ -8,7 +8,7 @@ export type ButtonType = "primary" | "default" | "danger" | "link";
 
 //组件的接口
 interface BaseButtonProps {
-  className?: String;
+  className?: string;
   disabled?: boolean;
   size?: ButtonSize;
   btnType?: ButtonType;
@@ -16,10 +16,16 @@ interface BaseButtonProps {
   href?: string;
 }
 
-export const Button: FC<BaseButtonProps> = (props) => {
-  const { className, disabled, size, children, btnType, href } = props;
+//加更多的原生props
+type NativeButtonProps = BaseButtonProps & ButtonHTMLAttributes<HTMLElement>;
+type AnchorButtonProps = BaseButtonProps & AnchorHTMLAttributes<HTMLElement>;
+export type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>;
 
-  const classes = classNames("btn", {
+export const Button: FC<ButtonProps> = (props) => {
+  const { className, disabled, size, children, btnType, href, ...restProps } =
+    props;
+
+  const classes = classNames("btn", className, {
     [`btn-${btnType}`]: btnType,
     [`btn-${size}`]: size,
     disabled: btnType === "link" && disabled,
@@ -27,13 +33,13 @@ export const Button: FC<BaseButtonProps> = (props) => {
 
   if (btnType === "link" && href) {
     return (
-      <a className={classes} href={href}>
+      <a className={classes} href={href} {...restProps}>
         {children}
       </a>
     );
   } else {
     return (
-      <button className={classes} disabled={disabled}>
+      <button className={classes} disabled={disabled} {...restProps}>
         {children}
       </button>
     );

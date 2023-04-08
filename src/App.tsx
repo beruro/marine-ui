@@ -1,27 +1,26 @@
 // export { default as Button } from "./components/Button";
 import React from "react";
 
-import Button, { ButtonSize, ButtonType } from "./components/Button/button";
+import Button from "./components/Button/button";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <Button className="fish">Common Button</Button>
+        <Button disabled>Disable Button</Button>
+        <Button btnType="link" href="www.baidu.com" target="_blank">
+          Juejin Link
+        </Button>
         <Button btnType="primary" size="lg">
-          我是按钮
+          Large Primary
         </Button>
-        <Button disabled>不可用按钮</Button>
-        <Button btnType="link" href="www.baidu.com">
-          我是链接
+        <Button btnType="danger" size="sm">
+          Small Danger
         </Button>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Button disabled btnType="link">
+          Disabled Link
+        </Button>
         <div>i am a fish</div>
       </header>
     </div>
