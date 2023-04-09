@@ -10,17 +10,16 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Menu
-          defaultIndex={0}
+          // defaultIndex={0}
           onSelect={(index) => {
             alert(index);
           }}
           mode="vertical"
         >
-          <MenuItem index={0}>cool link1</MenuItem>
-          <MenuItem index={1} disabled>
-            cool link2
-          </MenuItem>
-          <MenuItem index={2}>cool link3</MenuItem>
+          <MenuItem>cool link1</MenuItem>
+          <MenuItem disabled>cool link2</MenuItem>
+          <MenuItem>cool link3</MenuItem>
+          {/* <li></li> */}
         </Menu>
         <Button className="fish">Common Button</Button>
         <Button disabled>Disable Button</Button>

@@ -1,5 +1,6 @@
 import React, { createContext, useState } from "react";
 import classNames from "classnames";
+import { MenuItemProps } from "./menuItem";
 
 type MenuMode = "horezontal" | "vertical";
 type SelectCallback = (selectedIndex: number) => void;
@@ -18,7 +19,7 @@ interface IMenuContext {
 }
 //创建context
 export const MenuContext = createContext<IMenuContext>({ index: 0 });
-const Menu: React.FC<MenuProps> = (props) => {
+export const Menu: React.FC<MenuProps> = (props) => {
   const { className, mode, style, children, defaultIndex, onSelect } = props;
   const [currentActive, setActive] = useState(defaultIndex);
   const classes = classNames("fish-menu", className, {
@@ -36,10 +37,24 @@ const Menu: React.FC<MenuProps> = (props) => {
     index: currentActive ? currentActive : 0,
     onSelect: handleClick,
   };
+  const renderChildren = () => {
+    return React.Children.map(children, (child, index) => {
+      const childElement =
+        child as React.FunctionComponentElement<MenuItemProps>; //类型断言
+      const { displayName } = childElement.type;
+      if (displayName === "MenuItem") {
+        return React.cloneElement(childElement, { index });
+      } else {
+        console.error(
+          "Warning: Menu has a child which is not a MenuItem component"
+        );
+      }
+    });
+  };
   return (
     <ul className={classes} style={style}>
       <MenuContext.Provider value={passedContext}>
-        {children}
+        {renderChildren()}
       </MenuContext.Provider>
     </ul>
   );
