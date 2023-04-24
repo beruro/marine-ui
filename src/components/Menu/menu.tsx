@@ -24,6 +24,7 @@ export const Menu: React.FC<MenuProps> = (props) => {
   const [currentActive, setActive] = useState(defaultIndex);
   const classes = classNames("fish-menu", className, {
     "menu-vertical": mode === "vertical",
+    "menu-horizontal": mode !== "vertical",
   });
   const handleClick = (index: number) => {
     setActive(index);
@@ -42,7 +43,7 @@ export const Menu: React.FC<MenuProps> = (props) => {
       const childElement =
         child as React.FunctionComponentElement<MenuItemProps>; //类型断言
       const { displayName } = childElement.type;
-      if (displayName === "MenuItem") {
+      if (displayName === "MenuItem" || displayName === "SubMenu") {
         return React.cloneElement(childElement, { index });
       } else {
         console.error(

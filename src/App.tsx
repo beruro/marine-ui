@@ -4,6 +4,7 @@ import React from "react";
 import Button from "./components/Button/button";
 import Menu from "./components/Menu/menu";
 import MenuItem from "./components/Menu/menuItem";
+import SubMenu from "./components/Menu/subMenu";
 
 function App() {
   return (
@@ -14,10 +15,14 @@ function App() {
           onSelect={(index) => {
             alert(index);
           }}
-          mode="vertical"
+          // mode="vertical"
         >
           <MenuItem>cool link1</MenuItem>
           <MenuItem disabled>cool link2</MenuItem>
+          <SubMenu title="dropdown">
+            <MenuItem>down1</MenuItem>
+            <MenuItem>我是下拉菜单1</MenuItem>
+          </SubMenu>
           <MenuItem>cool link3</MenuItem>
           {/* <li></li> */}
         </Menu>
